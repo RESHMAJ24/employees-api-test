@@ -1,0 +1,23 @@
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd">
+
+    <flow name="get-employees-flow" doc:id="9faa7133-bb76-433c-8b50-cf2fc28e675a">
+
+       <!--  <http:listener path="/comments" method="GET" config-ref="employees-api-httpListenerConfig"></http:listener> -->
+		<logger level="INFO" doc:name="Logger" doc:id="36a34850-d09f-4945-bed8-7e475d5e75df" message="get employee flow"/>
+		<mongo:find-documents doc:name="Find documents" doc:id="3fd0c589-823a-4583-a45e-b22626959d98" config-ref="MongoDB_Config" collectionName="employees" fields="empId,name,role,location"/>
+		<ee:transform>
+            <ee:message>
+                <ee:set-payload><![CDATA[
+                %dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+
+    </flow>
+
+</mule>

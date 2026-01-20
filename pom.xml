@@ -4,7 +4,7 @@
 
 	<groupId>3db07ef6-c867-42ee-9a01-c4571cc6c945</groupId>
 	<artifactId>employees-api</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<packaging>mule-application</packaging>
 
 	<name>employees-api</name>
@@ -29,7 +29,7 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<cloudHub2Deployment>
+					<cloudhub2Deployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<provider>MC</provider>
 						<environment>Sandbox</environment>
@@ -41,7 +41,7 @@
 						<deploymentSettings>
 							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 						</deploymentSettings>
-					</cloudHub2Deployment>
+					</cloudhub2Deployment>
 					<sharedLibraries>
 						<sharedLibrary>
 							<groupId>org.mongodb</groupId>
@@ -142,6 +142,7 @@
 	</distributionManagement>
 
 </project>
+
 
 
 

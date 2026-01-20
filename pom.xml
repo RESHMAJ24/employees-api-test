@@ -4,10 +4,10 @@
 
 	<groupId>3db07ef6-c867-42ee-9a01-c4571cc6c945</groupId>
 	<artifactId>employees-api</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<packaging>mule-application</packaging>
 
-	<name>employees-api-test</name>
+	<name>employees-api</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,7 +43,6 @@
 						<target>Cloudhub-US-East-2</target>
 						<server>Repository</server>
 						<applicationName>${project.artifactId}</applicationName>
-						<releaseChannel>EDGE</releaseChannel>
 						<replicas>1</replicas>
 						<vCores>0.1</vCores>
 						<deploymentSettings>
@@ -143,6 +142,7 @@
 	</distributionManagement>
 
 </project>
+
 
 
 

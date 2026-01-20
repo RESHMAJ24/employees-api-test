@@ -39,7 +39,7 @@
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<environment>Sandbox</environment>
-						<target>us-east-2</target>
+						<target>Cloudhub-US-East-2</target>
 						<server>Repository</server>
 						<applicationName>${project.artifactId}</applicationName>
 						<releaseChannel>EDGE</releaseChannel>
@@ -142,6 +142,7 @@
 	</distributionManagement>
 
 </project>
+
 
 
 

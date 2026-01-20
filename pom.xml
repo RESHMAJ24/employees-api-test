@@ -4,7 +4,7 @@
 
 	<groupId>3db07ef6-c867-42ee-9a01-c4571cc6c945</groupId>
 	<artifactId>employees-api</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>mule-application</packaging>
 
 	<name>employees-api-test</name>
@@ -143,5 +143,6 @@
 	</distributionManagement>
 
 </project>
+
 
 

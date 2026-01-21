@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd 
 http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd">
 	
-	  <http:listener-config name="employees-api-httpListenerConfig">
-        <http:listener-connection host="0.0.0.0" port="8081" />
+	  <http:listener-config name="httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${https.port}" />
     
 </http:listener-config>
 
 	<apikit:config name="employees-api-config" api="resource::3db07ef6-c867-42ee-9a01-c4571cc6c945:employees-api-test:1.0.0:raml:zip:employees-api-test.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<configuration-properties doc:name="Configuration properties" doc:id="ba8348dc-700e-4757-a231-646ac3f3c004" file="${env}.properties" />
+	<global-property doc:name="Global Property" doc:id="1e63be9d-865c-4fa3-9f30-cb95ba644a16" name="env" value="dev" />
 	
+	<mongo:config name="MongoDB_Config" readConcern="MAJORITY">
+		<mongo:connection-string-connection connectionString="mongodb+srv://mulesoftuser:u1jPAItx55DRQyMo@mulesoft.gddeosg.mongodb.net/companyDB" />
+    
+</mongo:config>
 	
-	</mule>
+</mule>

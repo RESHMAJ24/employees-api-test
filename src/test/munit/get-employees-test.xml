@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns:mongodb="http://www.mulesoft.org/schema/mule/mongodb" xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/munit-tools http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+        http://www.mulesoft.org/schema/mule/mongodb http://www.mulesoft.org/schema/mule/mongodb/current/mule-mongodb.xsd">
+
+    <munit:config name="munit-config"/>
+	<munit:test name="test-get-employess-flow" doc:id="beb5b746-8082-48c5-aff1-ad788958008e" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="071b02f7-448a-42da-97a0-c8278ae3718d" processor="mongo:find-documents">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Find documents" attributeName="doc:name" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[[&#10;    {&#10;        "_id": {&#10;            "oid": "696c9de06936af6974efe68e"&#10;        },&#10;        "empId": 101,&#10;        "name": "Reshma",&#10;        "role": "Senior Software Engineer",&#10;        "location": "NZ"&#10;    }&#10;   ]]' />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="b57e56b2-669f-43b6-814e-a072bc14e061" name="get-employees-flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="145de678-d438-4ba0-b5db-9f3847673310" is="#[MunitTools::equalTo(1)]" expression="#[sizeOf(payload)]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

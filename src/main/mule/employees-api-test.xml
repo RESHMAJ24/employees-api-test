@@ -2,13 +2,13 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
     <apikit:config name="employees-api-test-config" api="resource::3db07ef6-c867-42ee-9a01-c4571cc6c945:employees-api-test:1.0.0:raml:zip:employees-api-test.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="employees-api-test-main">
-        <http:listener config-ref="employees-api-httpListenerConfig" path="/api/*">
+        <http:listener config-ref="httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
             <http:error-response statusCode="#[vars.httpStatus default 500]">
-                <http:body>#[payload]</http:body>
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
         <apikit:router config-ref="employees-api-test-config" />
@@ -94,13 +94,13 @@ output application/json
         </error-handler>
     </flow>
     <flow name="employees-api-test-console">
-        <http:listener config-ref="employees-api-httpListenerConfig" path="/console/*">
+        <http:listener config-ref="httpListenerConfig" path="/console/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
             <http:error-response statusCode="#[vars.httpStatus default 500]">
-                <http:body>#[payload]</http:body>
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
         <apikit:console config-ref="employees-api-test-config" />
@@ -121,8 +121,8 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\employees:employees-api-test-config">
-       <http:listener doc:name="Listener" doc:id="c65e6106-abc3-43d3-bd11-8f97e0189b7c" config-ref="employees-api-httpListenerConfig" path="/employees"/>
-		<flow-ref doc:name="Flow Reference" doc:id="e1a6439f-7fc4-4fbe-b561-32dbe7181cbc" name="get-employees-flow"/>
+       <http:listener doc:name="Listener" doc:id="c65e6106-abc3-43d3-bd11-8f97e0189b7c" config-ref="httpListenerConfig" path="/employees"/>
+		<flow-ref doc:name="get employees details" doc:id="e1a6439f-7fc4-4fbe-b561-32dbe7181cbc" name="get-employees-flow"/>
 		<logger level="INFO" doc:name="Logger" doc:id="efd1d49f-535f-42de-be09-897d15089bf4" message="payload"/>
     </flow>
 </mule>

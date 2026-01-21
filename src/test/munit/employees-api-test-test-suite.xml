@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="employees-api-test-test-suite.xml" />
+	<munit:test name="employees-api-test-test-suite-employees-api-test-mainTest" doc:id="f8a1c114-3189-40aa-9a66-bbcbe252069b" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to employees-api-test-main" doc:id="7ccb1771-08db-44f0-b384-5b3c968a9cf2" name="employees-api-test-main"/>
+		</munit:execution>
+	</munit:test>
+	<munit:test name="employees-api-test-test-suite-employees-api-test-consoleTest" doc:id="2fdde9c8-9d92-4a65-87ad-e8b44b704d3d" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to employees-api-test-console" doc:id="ce2e8556-d6fa-439e-9ae2-dc3d502b6aec" name="employees-api-test-console"/>
+		</munit:execution>
+	</munit:test>
+	<munit:test name="employees-api-test-test-suite-get:\employees:employees-api-test-configTest" doc:id="7454e2b1-f96f-435d-8e57-8fda618faf01" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\employees:employees-api-test-config" doc:id="f4e83706-a9d9-4691-b774-861b0c376c47" name="get-employees-flow"/>
+		</munit:execution>
+	</munit:test>
+
+
+</mule>

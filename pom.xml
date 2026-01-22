@@ -4,7 +4,7 @@
 
 	<groupId>3db07ef6-c867-42ee-9a01-c4571cc6c945</groupId>
 	<artifactId>employees-api</artifactId>
-	<version>1.0.9</version>
+	<version>1.0.10</version>
 	<packaging>mule-application</packaging>
 
 	<name>employees-api</name>
@@ -173,6 +173,10 @@
 			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+    <id>mulesoft-private</id>
+    <url>https://repository.mulesoft.org/nexus/content/repositories/private/</url>
+  </repository>
 	</repositories>
 
 	<pluginRepositories>

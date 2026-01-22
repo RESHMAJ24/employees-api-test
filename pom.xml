@@ -4,7 +4,7 @@
 
 	<groupId>3db07ef6-c867-42ee-9a01-c4571cc6c945</groupId>
 	<artifactId>employees-api</artifactId>
-	<version>1.0.8</version>
+	<version>1.0.9</version>
 	<packaging>mule-application</packaging>
 
 	<name>employees-api</name>
@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<app.runtime>4.10.1</app.runtime>
 		<mule.maven.plugin.version>4.6.1</mule.maven.plugin.version>
-		<munit.version>3.2.1</munit.version>
+		<munit.version>3.6.2</munit.version>
 	</properties>
 
 	<build>

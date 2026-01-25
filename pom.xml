@@ -19,75 +19,91 @@
 	</properties>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<cloudhub2Deployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<provider>MC</provider>
-						<environment>Sandbox</environment>
-						<target>Cloudhub-US-East-2</target>
-						<server>Repository</server>
-						<applicationName>${project.artifactId}</applicationName>
-						<replicas>1</replicas>
-						<vCores>0.1</vCores>
-						<deploymentSettings>
-							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-						</deploymentSettings>
-					</cloudhub2Deployment>
-					<sharedLibraries>
-						<sharedLibrary>
-							<groupId>org.mongodb</groupId>
-							<artifactId>mongodb-driver-legacy</artifactId>
-						</sharedLibrary>
-					</sharedLibraries>
-					<classifier>mule-application</classifier>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.mulesoft.munit.tools</groupId>
-				<artifactId>munit-maven-plugin</artifactId>
-				<version>${munit.version}</version>
-				<executions>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-							<goal>coverage-report</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<coverage>
-						<runCoverage>true</runCoverage>
-						<failBuild>true</failBuild>
-      <requiredApplicationCoverage>20</requiredApplicationCoverage>
-      <!-- <requiredResourceCoverage>50</requiredResourceCoverage> -->
-      <!-- <requiredFlowCoverage>50</requiredFlowCoverage> -->
-      <!-- END: MUnit coverage -->
-      <formats>
-        <!-- START: MUnit coverage -->
-        <format>console</format>
-        <format>sonar</format>
-        <format>json</format>
-        <!-- END: MUnit coverage -->
-        <format>html</format>
-      </formats>
-					</coverage>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <plugins>
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-clean-plugin</artifactId>
+      <version>3.2.0</version>
+    </plugin>
+
+    <!-- Mule Maven Plugin (NO CloudHub config here) -->
+    <plugin>
+      <groupId>org.mule.tools.maven</groupId>
+      <artifactId>mule-maven-plugin</artifactId>
+      <version>${mule.maven.plugin.version}</version>
+      <extensions>true</extensions>
+      <configuration>
+        <sharedLibraries>
+          <sharedLibrary>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-legacy</artifactId>
+          </sharedLibrary>
+        </sharedLibraries>
+        <classifier>mule-application</classifier>
+      </configuration>
+    </plugin>
+
+    <!-- MUnit -->
+    <plugin>
+      <groupId>com.mulesoft.munit.tools</groupId>
+      <artifactId>munit-maven-plugin</artifactId>
+      <version>${munit.version}</version>
+      <executions>
+        <execution>
+          <id>test</id>
+          <phase>test</phase>
+          <goals>
+            <goal>test</goal>
+            <goal>coverage-report</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <coverage>
+          <runCoverage>true</runCoverage>
+          <failBuild>true</failBuild>
+          <requiredApplicationCoverage>20</requiredApplicationCoverage>
+          <formats>
+            <format>console</format>
+            <format>sonar</format>
+            <format>json</format>
+            <format>html</format>
+          </formats>
+        </coverage>
+      </configuration>
+    </plugin>
+
+  </plugins>
+</build>
+<profiles>
+  <profile>
+    <id>cloudhub</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.mule.tools.maven</groupId>
+          <artifactId>mule-maven-plugin</artifactId>
+          <configuration>
+            <cloudhub2Deployment>
+              <uri>https://anypoint.mulesoft.com</uri>
+              <provider>MC</provider>
+              <environment>Sandbox</environment>
+              <target>Cloudhub-US-East-2</target>
+              <server>Repository</server>
+              <applicationName>${project.artifactId}</applicationName>
+              <replicas>1</replicas>
+              <vCores>0.1</vCores>
+              <deploymentSettings>
+                <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+              </deploymentSettings>
+            </cloudhub2Deployment>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
 
 	<dependencies>
 		<dependency>
@@ -201,4 +217,3 @@
 	</distributionManagement>
 
 </project>
-
